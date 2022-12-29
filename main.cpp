@@ -42,7 +42,7 @@ int main(int, char**) {
   const char* glsl_version = "#version 130";
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // 3.0+ only
+  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);  // 3.0+ only
 #endif
 
   // Create window with graphics context
@@ -61,6 +61,7 @@ int main(int, char**) {
 
   // Set Config Flags
   io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;  // Enable Keyboard Controls
+  io.ConfigDockingWithShift = true;
 
   // Setup Dear ImGui style (dark)
   ImGui::StyleColorsDark();
@@ -80,6 +81,9 @@ int main(int, char**) {
   // Our state
   bool show_demo_window = true;
   bool show_another_window = false;
+  bool my_test_window = false;
+
+  // background color
   ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
   // Main loop
@@ -118,6 +122,7 @@ int main(int, char**) {
       // Edit bools storing our window open/close state
       ImGui::Checkbox("Demo Window", &show_demo_window);
       ImGui::Checkbox("Another Window", &show_another_window);
+      ImGui::Checkbox("My Test Window", &my_test_window);
 
       // Edit 1 float using a slider from 0.0f to 1.0f
       ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
@@ -143,6 +148,17 @@ int main(int, char**) {
       ImGui::Begin("Another Window", &show_another_window);
       ImGui::Text("Hello from another window!");
       if (ImGui::Button("Close Me")) show_another_window = false;
+      ImGui::End();
+    }
+
+    // 4. Show a test window
+    if (my_test_window) {
+      ImGui::Begin("Test Window", &my_test_window);
+      ImGui::Text("Hello from test window!");
+      if (ImGui::Button("Close Me")) my_test_window = false;
+      // color picker (square)
+      static float col[3] = {1.0f, 0.0f, 0.5f};
+      ImGui::ColorPicker3("MyColor##3", col);
       ImGui::End();
     }
 
