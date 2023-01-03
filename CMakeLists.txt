@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 # initialize the project
 project(app)
 
-add_executable(app borderless.cpp)
+add_executable(app border_test.cpp)
 
 add_subdirectory(src)
 

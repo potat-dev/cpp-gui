@@ -197,7 +197,7 @@ int main(int, char**) {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
   // transparent window
-  glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
+  // glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
   // set the visibility window hint to false for subsequent window creation
   // glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 #endif
