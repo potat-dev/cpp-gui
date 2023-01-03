@@ -195,6 +195,11 @@ int main(int, char**) {
   const char* glsl_version = "#version 130";
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+
+  // transparent window
+  glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
+  // set the visibility window hint to false for subsequent window creation
+  // glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 #endif
 
   // Create window with graphics context
@@ -291,7 +296,7 @@ int main(int, char**) {
       static int counter = 0;
 
       // Create a window called "Hello, world!" and append into it.
-      ImGui::Begin("Hello, world!");
+      ImGui::Begin("Hello, world!", NULL); // , ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
 
       // Display some text (you can use a format strings too)
       ImGui::Text("This is some useful text.");
@@ -420,9 +425,14 @@ int main(int, char**) {
     int display_w, display_h;
     glfwGetFramebufferSize(window, &display_w, &display_h);
     glViewport(0, 0, display_w, display_h);
-    glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w,
-                 clear_color.z * clear_color.w, clear_color.w);
-    glClear(GL_COLOR_BUFFER_BIT);
+
+    // transparent background (test)
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
+    // glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w,
+    //              clear_color.z * clear_color.w, clear_color.w);
+    // glClear(GL_COLOR_BUFFER_BIT);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
     // Update and Render additional Platform Windows
